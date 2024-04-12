@@ -3,6 +3,7 @@ import { accordion } from './interactions/accordion';
 import { hoverActive } from './interactions/hoverActive';
 import { horizontalScroll } from './interactions/horizontalScroll';
 import { scrollIn } from './interactions/scrollIn';
+import { cursor } from './interactions/cursor';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
         accordion(gsapContext);
         hoverActive(gsapContext);
         teamScroll();
+        cursor();
         //conditional interactions
         if (!reduceMotion) {
           scrollIn(gsapContext);

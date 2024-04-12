@@ -76,9 +76,9 @@ export const accordion = function (gsapContext) {
             openAccordion(clickedItem);
           }
         }
-        // if the current item IS ACTIVE and keep one open is false
+        // if the current item IS ACTIVE and keep one open is false close it
         if (clickedItemAlreadyActive && !keepOneOpen) {
-          openAccordion(clickedItem);
+          openAccordion(clickedItem, false);
         }
       });
     }
