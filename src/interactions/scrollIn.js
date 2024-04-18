@@ -60,7 +60,7 @@ export const scrollIn = function (gsapContext) {
     };
     const varsTo = {
       opacity: 1,
-      x: '0rem',
+      y: '0rem',
     };
     //optional adjustments to the tween
     // {stagger: large}
@@ -82,7 +82,7 @@ export const scrollIn = function (gsapContext) {
     const tween = defaultTween(splitText.words, tl, { stagger: true, skew: 'large' });
     //add event calleback to revert text on completion
     tl.eventCallback('onComplete', () => {
-      splitText.revert();
+      // splitText.revert();
     });
   };
 

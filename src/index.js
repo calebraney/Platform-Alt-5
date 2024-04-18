@@ -93,8 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //functional interactions
         accordion(gsapContext);
         hoverActive(gsapContext);
-        teamScroll();
-        cursor();
+        teamScroll(gsapContext);
+        scrollIn(gsapContext);
+        cursor(gsapContext);
         //conditional interactions
         if (!reduceMotion) {
           scrollIn(gsapContext);
