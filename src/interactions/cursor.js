@@ -11,6 +11,7 @@ can also use pointer to check for non fine pointers
     display: none;
   }
 }
+
 */
 
 export const cursor = function (gsapContext) {
@@ -22,21 +23,35 @@ export const cursor = function (gsapContext) {
   const DOT = '[data-ix-cursor="dot"]';
   const HOVER = '[data-ix-cursor="hover"]';
   const NO_HOVER = '[data-ix-cursor="no-hover"]';
+  const CHECKBOX = '[data-ix-cursor="checkbox"]';
   //classes
   const HOVER_CLASS = 'is-hover';
   // select the items
   const cursorWrap = document.querySelector(WRAP);
   const cursorInner = document.querySelector(INNER);
   const cursorDot = document.querySelector(DOT);
+  const cursorCheckbox = document.querySelector(CHECKBOX);
 
   // return if items are null
-  if (!cursorWrap || !cursorInner) return;
+  if (!cursorWrap || !cursorInner | !cursorCheckbox) return;
   //check if the device has a touch screen
   if ('ontouchstart' in window || navigator.maxTouchPoints) return;
 
   //check breakpoints and quit function if set on specific breakpoints
   let runOnBreakpoint = checkBreakpoints(cursorWrap, ANIMATION_ID, gsapContext);
   if (runOnBreakpoint === false) return;
+
+  const checkCursor = function () {
+    console.log(cursorCheckbox.checked);
+    //cursor checkbox is checked
+    if (cursorCheckbox.checked) {
+      cursorWrap.style.display = 'flex';
+    } else {
+      cursorWrap.style.display = 'none';
+    }
+  };
+  checkCursor();
+  cursorCheckbox.addEventListener('change', checkCursor);
 
   const cursorHover = function () {
     // get all links without a no-hover attribute and any other elements with a hover attribute into an array

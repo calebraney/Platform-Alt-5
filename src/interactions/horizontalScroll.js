@@ -35,9 +35,9 @@ export const horizontalScroll = function () {
           ease: 'power1.out',
         },
       })
-      .set(stickyEl, {
-        overflow: 'hidden',
-      })
+      // .set(stickyEl, {
+      //   overflow: 'hidden',
+      // })
       .to(track, {
         xPercent: -100,
         ease: 'none',
