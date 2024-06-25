@@ -24,6 +24,7 @@ export const cursor = function (gsapContext) {
   const HOVER = '[data-ix-cursor="hover"]';
   const NO_HOVER = '[data-ix-cursor="no-hover"]';
   const CHECKBOX = '[data-ix-cursor="checkbox"]';
+  const CURSOR_HIDE = '[data-ix-cursor="hide"]';
   //classes
   const HOVER_CLASS = 'is-hover';
   // select the items
@@ -67,6 +68,20 @@ export const cursor = function (gsapContext) {
     });
   };
   cursorHover();
+  const cursorHide = function () {
+    // get all links without a no-hover attribute and any other elements with a hover attribute into an array
+    const hoverElements = gsap.utils.toArray(`${CURSOR_HIDE}`);
+    hoverElements.forEach((item) => {
+      if (!item || !cursorDot) return;
+      item.addEventListener('mouseover', function (e) {
+        cursorDot.style.opacity = 0;
+      });
+      item.addEventListener('mouseleave', function (e) {
+        cursorDot.style.opacity = 1;
+      });
+    });
+  };
+  cursorHide();
   const cursorClick = function () {
     if (!cursorDot) return;
     document.addEventListener('click', function (e) {
