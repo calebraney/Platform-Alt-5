@@ -82,14 +82,14 @@ export const cursor = function (gsapContext) {
     });
   };
   cursorHide();
-  const cursorClick = function () {
-    if (!cursorDot) return;
-    document.addEventListener('click', function (e) {
-      let tl = gsap.timeline({});
-      tl.fromTo(cursorDot, { rotateZ: -45 }, { rotateZ: 45, ease: 'power1.out', duration: 0.3 });
-    });
-  };
-  cursorClick();
+  // const cursorClick = function () {
+  //   if (!cursorDot) return;
+  //   document.addEventListener('click', function (e) {
+  //     let tl = gsap.timeline({});
+  //     tl.fromTo(cursorDot, { rotateZ: -45 }, { rotateZ: 45, ease: 'power1.out', duration: 0.3 });
+  //   });
+  // };
+  // cursorClick();
 
   //handle cursor movement
   const cursorMove = function () {
