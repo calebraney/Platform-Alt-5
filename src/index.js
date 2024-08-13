@@ -4,6 +4,7 @@ import { hoverActive } from './interactions/hoverActive';
 import { horizontalScroll } from './interactions/horizontalScroll';
 import { scrollIn } from './interactions/scrollIn';
 import { cursor } from './interactions/cursor';
+import Splide from '@splidejs/splide';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
@@ -75,6 +76,56 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     });
   };
+  const teamSlider = function () {
+    //Swiper selectors
+    const SLIDER = '.team_slider';
+    //Button selectors
+    const NEXT_BUTTON = '.splide__arrow--prev';
+    const PREVIOUS_BUTTON = '.splide__arrow--next';
+
+    document.querySelectorAll(SLIDER).forEach(function (slider) {
+      if (!slider) return;
+      const nextButtonEl = slider.querySelector(NEXT_BUTTON);
+      const previousButtonEl = slider.querySelector(PREVIOUS_BUTTON);
+      if (!nextButtonEl || !previousButtonEl || !slider) return;
+
+      const splide = new Splide(slider, {
+        type: 'loop', //slide or loop
+        speed: 800, // transition speed in miliseconds
+        dragAngleThreshold: 60, // default is 30
+        autoWidth: false, // for cards with differing widths
+        rewind: false, // go back to beginning when reach end
+        gap: '2rem',
+        perPage: 3,
+        perMove: 1,
+        pagination: false,
+        breakpoints: {
+          991: {
+            // Tablet
+            perPage: 2,
+            gap: '3vw',
+          },
+          767: {
+            // Mobile Landscape
+            perPage: 2,
+            gap: '3vw',
+          },
+          479: {
+            // Mobile Portrait
+            perPage: 1,
+            gap: '0vw',
+          },
+        },
+        arrows: { prev: previousButtonEl, next: nextButtonEl },
+        classes: {
+          // Add classes for arrows.
+          prev: PREVIOUS_BUTTON,
+          next: NEXT_BUTTON,
+        },
+      });
+      splide.mount();
+    });
+  };
 
   //////////////////////////////
   //Control Functions on page load
@@ -93,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //functional interactions
         accordion(gsapContext);
         hoverActive(gsapContext);
-        teamScroll(gsapContext);
         scrollIn(gsapContext);
         cursor(gsapContext);
         //conditional interactions
@@ -102,6 +152,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (isDesktop) {
           horizontalScroll();
+        }
+        if (isDesktop || isTablet) {
+          teamScroll(gsapContext);
+        }
+        if (isMobile) {
+          teamSlider();
         }
       }
     );
