@@ -7,7 +7,6 @@ import { cursor } from './interactions/cursor';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
-  console.log('Local Script Loaded');
 
   // register gsap plugins if available
   if (gsap.ScrollTrigger !== undefined) {
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //////////////////////////////
   //Global Variables
-  const resetScrollTriggers = document.querySelectorAll('[data-ix-reset]');
 
   const teamScroll = function () {
     //selectors
@@ -100,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!reduceMotion) {
           scrollIn(gsapContext);
         }
-        if (isDesktop) {
+        if (isDesktop || isTablet) {
           horizontalScroll();
         }
       }
@@ -109,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
   gsapInit();
 
   //reset gsap on click of reset triggers
+  const resetScrollTriggers = document.querySelectorAll('[data-ix-reset]');
   resetScrollTriggers.forEach(function (item) {
     item.addEventListener('click', function (e) {
       ScrollTrigger.refresh();

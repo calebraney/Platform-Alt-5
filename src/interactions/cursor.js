@@ -25,8 +25,11 @@ export const cursor = function (gsapContext) {
   const NO_HOVER = '[data-ix-cursor="no-hover"]';
   const CHECKBOX = '[data-ix-cursor="checkbox"]';
   const CURSOR_HIDE = '[data-ix-cursor="hide"]';
+  const COOKIE = 'default-cursor';
+
   //classes
   const HOVER_CLASS = 'is-hover';
+  const CHECKED_CLASS = 'is-checked';
   // select the items
   const cursorWrap = document.querySelector(WRAP);
   const cursorInner = document.querySelector(INNER);
@@ -42,14 +45,31 @@ export const cursor = function (gsapContext) {
   let runOnBreakpoint = checkBreakpoints(cursorWrap, ANIMATION_ID, gsapContext);
   if (runOnBreakpoint === false) return;
 
-  const checkCursor = function () {
-    console.log(cursorCheckbox.checked);
-    //cursor checkbox is checked
-    if (cursorCheckbox.checked) {
-      cursorWrap.style.display = 'flex';
+  //check cookie on load and update checkbox
+  const checkCookieOnLoad = function () {
+    // no cookie set
+    if (localStorage.getItem(COOKIE) === null) {
+      cursorCheckbox.click();
     } else {
-      cursorWrap.style.display = 'none';
+      // default cursor cookie set
+      cursorCheckbox.checked = false;
     }
+  };
+  checkCookieOnLoad();
+  const checkCursor = function () {
+    //when checkbox is changed update cookie and set cursor
+    //cursor checkbox is checked
+    if (cursorCheckbox.checked === true) {
+      // cursorCheckbox.classList.add(CHECKED_CLASS);
+      cursorWrap.style.display = 'flex';
+      localStorage.removeItem(COOKIE);
+    }
+    if (cursorCheckbox.checked === false) {
+      // cursorCheckbox.classList.remove(CHECKED_CLASS);
+      cursorWrap.style.display = 'none';
+      localStorage.setItem(COOKIE, 'true');
+    }
+    // console.log('cookie:', localStorage.getItem(COOKIE), 'checked:', cursorCheckbox.checked);
   };
   checkCursor();
   cursorCheckbox.addEventListener('change', checkCursor);
@@ -82,14 +102,14 @@ export const cursor = function (gsapContext) {
     });
   };
   cursorHide();
-  const cursorClick = function () {
-    if (!cursorDot) return;
-    document.addEventListener('click', function (e) {
-      let tl = gsap.timeline({});
-      tl.fromTo(cursorDot, { rotateZ: -45 }, { rotateZ: 45, ease: 'power1.out', duration: 0.3 });
-    });
-  };
-  cursorClick();
+  // const cursorClick = function () {
+  //   if (!cursorDot) return;
+  //   document.addEventListener('click', function (e) {
+  //     let tl = gsap.timeline({});
+  //     tl.fromTo(cursorDot, { rotateZ: -45 }, { rotateZ: 45, ease: 'power1.out', duration: 0.3 });
+  //   });
+  // };
+  // cursorClick();
 
   //handle cursor movement
   const cursorMove = function () {
