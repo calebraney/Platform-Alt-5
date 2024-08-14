@@ -8,7 +8,7 @@ import Splide from '@splidejs/splide';
 
 document.addEventListener('DOMContentLoaded', function () {
   // Comment out for production
-  console.log('Local Script Loaded');
+  // console.log('Local Script Loaded');
 
   // register gsap plugins if available
   if (gsap.ScrollTrigger !== undefined) {
