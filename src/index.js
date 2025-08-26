@@ -4,6 +4,7 @@ import { hoverActive } from './interactions/hoverActive';
 import { horizontalScroll } from './interactions/horizontalScroll';
 import { scrollIn } from './interactions/scrollIn';
 import { cursor } from './interactions/cursor';
+import { modal } from './interactions/modal';
 import Splide from '@splidejs/splide';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -146,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hoverActive(gsapContext);
         scrollIn(gsapContext);
         cursor(gsapContext);
+        modal(gsapContext);
         //conditional interactions
         if (!reduceMotion) {
           scrollIn(gsapContext);

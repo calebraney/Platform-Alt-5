@@ -10,6 +10,29 @@ export const attr = function (defaultVal, attrVal) {
   if (!isNaN(attrVal) && defaultValType === 'number') return +attrVal;
   return defaultVal;
 };
+export const stopScroll = function (lenis) {
+  //non lenis version
+  if (lenis) {
+    //lenis version
+    lenis.stop();
+  } else {
+    const body = document.querySelector('body');
+    const NO_SCROLL_CLASS = 'no-scroll';
+    body.classList.add(NO_SCROLL_CLASS);
+  }
+};
+//utility function to start page  scrolling
+export const startScroll = function (lenis) {
+  //non lenis version
+  if (lenis) {
+    //lenis version
+    lenis.start();
+  } else {
+    const body = document.querySelector('body');
+    const NO_SCROLL_CLASS = 'no-scroll';
+    body.classList.remove(NO_SCROLL_CLASS);
+  }
+};
 
 //split text utility
 export const runSplit = function (text, types = 'lines, words') {
