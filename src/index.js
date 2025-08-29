@@ -77,6 +77,57 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     });
   };
+  const videoSlider = function () {
+    //Swiper selectors
+    const SLIDER = '.video_slider';
+    //Button selectors
+    const NEXT_BUTTON = '.splide__arrow--prev';
+    const PREVIOUS_BUTTON = '.splide__arrow--next';
+
+    document.querySelectorAll(SLIDER).forEach(function (slider) {
+      if (!slider) return;
+      const nextButtonEl = slider.querySelector(NEXT_BUTTON);
+      const previousButtonEl = slider.querySelector(PREVIOUS_BUTTON);
+      if (!nextButtonEl || !previousButtonEl || !slider) return;
+
+      const splide = new Splide(slider, {
+        type: 'loop', //slide or loop
+        speed: 800, // transition speed in miliseconds
+        dragAngleThreshold: 60, // default is 30
+        autoWidth: false, // for cards with differing widths
+        rewind: false, // go back to beginning when reach end
+        gap: '2rem',
+        perPage: 1,
+        perMove: 1,
+        pagination: false,
+        breakpoints: {
+          991: {
+            // Tablet
+            perPage: 1,
+            gap: '3vw',
+          },
+          767: {
+            // Mobile Landscape
+            perPage: 1,
+            gap: '3vw',
+          },
+          479: {
+            // Mobile Portrait
+            perPage: 1,
+            gap: '3vw',
+          },
+        },
+        arrows: { prev: previousButtonEl, next: nextButtonEl },
+        classes: {
+          // Add classes for arrows.
+          prev: PREVIOUS_BUTTON,
+          next: NEXT_BUTTON,
+        },
+      });
+      splide.mount();
+      console.log(splide);
+    });
+  };
   const teamSlider = function () {
     //Swiper selectors
     const SLIDER = '.team_slider';
@@ -100,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
         perPage: 3,
         perMove: 1,
         pagination: false,
+        trimSpace: false,
         breakpoints: {
           991: {
             // Tablet
@@ -148,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollIn(gsapContext);
         cursor(gsapContext);
         modal(gsapContext);
+        videoSlider();
         //conditional interactions
         if (!reduceMotion) {
           scrollIn(gsapContext);
